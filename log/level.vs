@@ -1,15 +1,9 @@
 package log
 
-@_silgen_name("getenv")
-func c_getenv(_ name: UnsafePointer<int8>) -> UnsafePointer<int8>?
+import "os/env"
 
 func getEnvVar(_ name: string) -> string? {
-    return name.withCString { ptr in
-        if let res = c_getenv(ptr) {
-            return string(cString: res)
-        }
-        return nil
-    }
+    return env.Get(name)
 }
 
 /// Level represents the severity of a log record.

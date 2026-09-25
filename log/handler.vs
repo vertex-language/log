@@ -1,10 +1,6 @@
 package log
 
-@_silgen_name("isatty")
-func c_isatty(_ fd: int32) -> int32
-
-@_silgen_name("write")
-func c_write(_ fd: int32, _ buf: UnsafePointer<int8>, _ count: int) -> int
+import "os/term"
 
 func shouldColorizeStderr() -> bool {
     if let noColor = getEnvVar("NO_COLOR") {
@@ -13,7 +9,7 @@ func shouldColorizeStderr() -> bool {
     if let force = getEnvVar("CLICOLOR_FORCE") {
         if force == "1" { return true }
     }
-    return c_isatty(2) != 0
+    return term.IsTerminal(.stderr)
 }
 
 func escapeJsonString(_ s: string) -> string {
@@ -37,10 +33,7 @@ func escapeJsonString(_ s: string) -> string {
 }
 
 func defaultStderrEmit(_ line: string) {
-    let text = line + "\n"
-    _ = text.withCString { ptr in
-        c_write(2, ptr, text.utf8.count)
-    }
+    print(line)
 }
 
 public enum Format {
