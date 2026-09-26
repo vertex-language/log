@@ -23,10 +23,10 @@ Structured, levelled logging: key-value attributes, contextual loggers, severity
 
 ## Quick Start
 
-Run any entry point with:
+Run the test suite in `cmd/` directly with `vsc run`:
 
 ```bash
-vsc run main.vs
+vsc run check
 ```
 
 ### Basic Logging
