@@ -12,7 +12,7 @@ func shouldColorizeStderr() -> bool {
     return term.IsTerminal(.stderr)
 }
 
-func escapeJsonString(_ s: string) -> string {
+func escapeJsonString(s: string) -> string {
     var out = ""
     for b in s.utf8 {
         if b == 0x22 {
@@ -32,7 +32,7 @@ func escapeJsonString(_ s: string) -> string {
     return out
 }
 
-func defaultStderrEmit(_ line: string) {
+func defaultStderrEmit(line: string) {
     print(line)
 }
 
@@ -70,11 +70,11 @@ public struct Handler {
         return Handler(format: .json, minLevel: lvl, useColors: false, emit: emit)
     }
 
-    public func Enabled(_ level: Level) -> bool {
+    public func Enabled(level: Level) -> bool {
         return level.IsEnabled(minLevel: self.MinLevel)
     }
 
-    public func WithAttrs(_ attrs: [Attr]) -> Handler {
+    public func WithAttrs(attrs: [Attr]) -> Handler {
         var merged = self.BaseAttrs
         for a in attrs {
             merged.append(a)
@@ -82,7 +82,7 @@ public struct Handler {
         return Handler(format: self.OutputFormat, minLevel: self.MinLevel, useColors: self.UseColors, baseAttrs: merged, emit: self.Emit)
     }
 
-    public func FormatRecord(_ record: Record) -> string {
+    public func FormatRecord(record: Record) -> string {
         var allAttrs = self.BaseAttrs
         for a in record.Attrs {
             allAttrs.append(a)
@@ -132,7 +132,7 @@ public struct Handler {
         return json
     }
 
-    public func Handle(_ record: Record) {
+    public func Handle(record: Record) {
         if !self.Enabled(record.Level) {
             return
         }

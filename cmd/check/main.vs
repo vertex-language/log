@@ -5,7 +5,7 @@ import "log"
 var checkCount: int32 = 0
 var failureCount: int32 = 0
 
-func assert(_ condition: bool, _ message: string) {
+func assert(condition: bool, message: string) {
     checkCount += 1
     if condition {
         print("ok    \(message)")

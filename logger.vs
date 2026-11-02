@@ -9,13 +9,13 @@ public struct Logger {
     }
 
     /// Returns a new Logger with the given attributes appended to every record.
-    public func With(_ attrs: [Attr]) -> Logger {
+    public func With(attrs: [Attr]) -> Logger {
         let newHandler = self.H.WithAttrs(attrs)
         return Logger(handler: newHandler)
     }
 
     /// Returns a new Logger with the given key-value dictionary appended to every record.
-    public func With(_ fields: [string: string]) -> Logger {
+    public func With(fields: [string: string]) -> Logger {
         var attrs: [Attr] = []
         for (k, v) in fields {
             attrs.append(Attr(k, v))
@@ -31,41 +31,41 @@ public struct Logger {
         self.H.Handle(record)
     }
 
-    public func Debug(_ message: string, _ attrs: [Attr] = []) {
+    public func Debug(message: string, attrs: [Attr] = []) {
         self.Log(level: .debug, message: message, attrs: attrs)
     }
 
-    public func Debug(_ message: string, _ fields: [string: string]) {
+    public func Debug(message: string, fields: [string: string]) {
         var attrs: [Attr] = []
         for (k, v) in fields { attrs.append(Attr(k, v)) }
         self.Debug(message, attrs)
     }
 
-    public func Info(_ message: string, _ attrs: [Attr] = []) {
+    public func Info(message: string, attrs: [Attr] = []) {
         self.Log(level: .info, message: message, attrs: attrs)
     }
 
-    public func Info(_ message: string, _ fields: [string: string]) {
+    public func Info(message: string, fields: [string: string]) {
         var attrs: [Attr] = []
         for (k, v) in fields { attrs.append(Attr(k, v)) }
         self.Info(message, attrs)
     }
 
-    public func Warn(_ message: string, _ attrs: [Attr] = []) {
+    public func Warn(message: string, attrs: [Attr] = []) {
         self.Log(level: .warn, message: message, attrs: attrs)
     }
 
-    public func Warn(_ message: string, _ fields: [string: string]) {
+    public func Warn(message: string, fields: [string: string]) {
         var attrs: [Attr] = []
         for (k, v) in fields { attrs.append(Attr(k, v)) }
         self.Warn(message, attrs)
     }
 
-    public func Error(_ message: string, _ attrs: [Attr] = []) {
+    public func Error(message: string, attrs: [Attr] = []) {
         self.Log(level: .error, message: message, attrs: attrs)
     }
 
-    public func Error(_ message: string, _ fields: [string: string]) {
+    public func Error(message: string, fields: [string: string]) {
         var attrs: [Attr] = []
         for (k, v) in fields { attrs.append(Attr(k, v)) }
         self.Error(message, attrs)
@@ -75,51 +75,51 @@ public struct Logger {
 // Global default handler
 var defaultHandler = Handler.Text()
 
-public func SetHandler(_ handler: Handler) {
+public func SetHandler(handler: Handler) {
     defaultHandler = handler
 }
 
-public func SetLevel(_ level: Level) {
+public func SetLevel(level: Level) {
     defaultHandler.MinLevel = level
 }
 
-public func With(_ attrs: [Attr]) -> Logger {
+public func With(attrs: [Attr]) -> Logger {
     return Logger().With(attrs)
 }
 
-public func With(_ fields: [string: string]) -> Logger {
+public func With(fields: [string: string]) -> Logger {
     return Logger().With(fields)
 }
 
-public func Debug(_ message: string, _ attrs: [Attr] = []) {
+public func Debug(message: string, attrs: [Attr] = []) {
     Logger().Debug(message, attrs)
 }
 
-public func Debug(_ message: string, _ fields: [string: string]) {
+public func Debug(message: string, fields: [string: string]) {
     Logger().Debug(message, fields)
 }
 
-public func Info(_ message: string, _ attrs: [Attr] = []) {
+public func Info(message: string, attrs: [Attr] = []) {
     Logger().Info(message, attrs)
 }
 
-public func Info(_ message: string, _ fields: [string: string]) {
+public func Info(message: string, fields: [string: string]) {
     Logger().Info(message, fields)
 }
 
-public func Warn(_ message: string, _ attrs: [Attr] = []) {
+public func Warn(message: string, attrs: [Attr] = []) {
     Logger().Warn(message, attrs)
 }
 
-public func Warn(_ message: string, _ fields: [string: string]) {
+public func Warn(message: string, fields: [string: string]) {
     Logger().Warn(message, fields)
 }
 
-public func Error(_ message: string, _ attrs: [Attr] = []) {
+public func Error(message: string, attrs: [Attr] = []) {
     Logger().Error(message, attrs)
 }
 
-public func Error(_ message: string, _ fields: [string: string]) {
+public func Error(message: string, fields: [string: string]) {
     Logger().Error(message, fields)
 }
 

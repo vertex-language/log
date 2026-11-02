@@ -2,7 +2,7 @@ package log
 
 import "os/env"
 
-func getEnvVar(_ name: string) -> string? {
+func getEnvVar(name: string) -> string? {
     return env.Get(name)
 }
 
@@ -49,7 +49,7 @@ public enum Level {
     }
 
     /// Parses level from string (e.g. "debug", "info", "warn", "error").
-    public static func Parse(_ str: string) -> Level? {
+    public static func Parse(str: string) -> Level? {
         var lower = ""
         for b in str.utf8 {
             if b >= 0x41 && b <= 0x5A { // A-Z
